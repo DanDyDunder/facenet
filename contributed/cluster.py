@@ -123,7 +123,7 @@ def align_data(image_list, image_size, margin, pnet, rnet, onet):
 
     for x in xrange(len(image_list)):
         img_size = np.asarray(image_list[x].shape)[0:2]
-        bounding_boxes, _ = align.detect_face.detect_face(image_list[x], minsize, pnet, rnet, onet, threshold, factor)
+        bounding_boxes, _ = align.detect_face.detect_faces_in_image(image_list[x], minsize, pnet, rnet, onet, threshold, factor)
         nrof_samples = len(bounding_boxes)
         if nrof_samples > 0:
             for i in xrange(nrof_samples):
