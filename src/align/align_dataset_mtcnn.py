@@ -93,7 +93,7 @@ def main(args):
                             img = facenet.to_rgb(img)
                         img = img[:,:,0:3]
     
-                        bounding_boxes, _ = align.detect_face.detect_faces_in_image(img, minsize, pnet, rnet, onet, threshold, factor)
+                        bounding_boxes, _ = align.detect_face.detect_face(img, minsize, pnet, rnet, onet, threshold, factor)
                         nrof_faces = bounding_boxes.shape[0]
                         if nrof_faces>0:
                             det = bounding_boxes[:,0:4]

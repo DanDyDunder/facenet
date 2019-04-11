@@ -56,7 +56,7 @@ factor = 0.709 # scale factor
 source_path = '/home/david/datasets/casia/CASIA-maxpy-clean/0000045/002.jpg'
 img = misc.imread(source_path)
 
-bounding_boxes, points = align.detect_face.detect_faces_in_image(img, minsize, pnet_fun, rnet_fun, onet_fun, threshold, factor)
+bounding_boxes, points = align.detect_face.detect_face(img, minsize, pnet_fun, rnet_fun, onet_fun, threshold, factor)
 
 print('Bounding box: %s' % bounding_boxes)
 
