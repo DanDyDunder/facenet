@@ -94,7 +94,7 @@ def load_and_align_data(image_paths, image_size, margin, gpu_memory_fraction):
     for image in tmp_image_paths:
         img = misc.imread(os.path.expanduser(image), mode='RGB')
         img_size = np.asarray(img.shape)[0:2]
-        bounding_boxes, _ = align.detect_face.detect_face(img, minsize, pnet, rnet, onet, threshold, factor)
+        bounding_boxes, _ = align.detect_face.detect_faces_in_image(img, minsize, pnet, rnet, onet, threshold, factor)
         if len(bounding_boxes) < 1:
           image_paths.remove(image)
           print("can't detect face, remove ", image)
