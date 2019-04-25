@@ -1,7 +1,7 @@
 import tensorflow as tf
-from .. src.align import detect_face
-from .. src import facenet
-from .. facenet import model_downloader
+from  si_facenet.src.align import detect_face
+from si_facenet.src import facenet
+from si_facenet.facenet import model_downloader
 
 import copy
 import os
@@ -27,7 +27,8 @@ class FaceNet(object):
 		tmp_image_paths = copy.copy(images)
 		list_of_bounding_boxes = []
 		for image in tmp_image_paths:
-			img = image
+			img = cv2.imdecode(image, cv2.IMREAD_COLOR)[:, :, ::-1]
+			print(img)
 			bounding_box, _ = detect_face.detect_face(
 				img, self.minsize, self.pnet, self.rnet, self.onet, threshold, self.factor)
 			if len(bounding_box) < 1:
@@ -41,7 +42,7 @@ class FaceNet(object):
 	def detect_faces_in_image(self, image, threshold=default_three_step_threshold):
 		tmp_image_path = copy.copy(image)
 
-		img = image
+		img = cv2.imdecode(image, cv2.IMREAD_COLOR)[:, :, ::-1]
 		bounding_boxes, _ = detect_face.detect_face(
 			img, self.minsize, self.pnet, self.rnet, self.onet, threshold, self.factor)
 		return self.pretty_output(bounding_boxes)
@@ -50,7 +51,7 @@ class FaceNet(object):
 		tmp_image_paths = copy.copy(images)
 		img_list = []
 		for image in tmp_image_paths:
-			img = image
+			img = cv2.imdecode(image, cv2.IMREAD_COLOR)[:, :, ::-1]
 			img_size = np.asarray(img.shape)[0:2]
 			bounding_boxes, _ = detect_face.detect_face(
 				img, self.minsize, self.pnet, self.rnet, self.onet, threshold, self.factor)
@@ -128,4 +129,3 @@ class FaceNet(object):
 				'confidence': element[4]
 			})
 		return box_and_confidence
-
