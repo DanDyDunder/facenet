@@ -27,7 +27,7 @@ class FaceNet(object):
 		tmp_image_paths = copy.copy(images)
 		list_of_bounding_boxes = []
 		for image in tmp_image_paths:
-			img = cv2.imread(os.path.expanduser(image))[:, :, ::-1]
+			img = image
 			bounding_box, _ = detect_face.detect_face(
 				img, self.minsize, self.pnet, self.rnet, self.onet, threshold, self.factor)
 			if len(bounding_box) < 1:
@@ -41,7 +41,7 @@ class FaceNet(object):
 	def detect_faces_in_image(self, image, threshold=default_three_step_threshold):
 		tmp_image_path = copy.copy(image)
 
-		img = cv2.imread(os.path.expanduser(tmp_image_path))[:, :, ::-1]
+		img = image
 		bounding_boxes, _ = detect_face.detect_face(
 			img, self.minsize, self.pnet, self.rnet, self.onet, threshold, self.factor)
 		return self.pretty_output(bounding_boxes)
@@ -50,7 +50,7 @@ class FaceNet(object):
 		tmp_image_paths = copy.copy(images)
 		img_list = []
 		for image in tmp_image_paths:
-			img = cv2.imread(os.path.expanduser(image))[:, :, ::-1]
+			img = image
 			img_size = np.asarray(img.shape)[0:2]
 			bounding_boxes, _ = detect_face.detect_face(
 				img, self.minsize, self.pnet, self.rnet, self.onet, threshold, self.factor)
